@@ -14,7 +14,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import PublicFeedService from '../service/PublicFeedService.js';
 
 function Copyright() {
@@ -30,15 +30,19 @@ function Copyright() {
   );
 }
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-
 const theme = createTheme();
 
 export default function Album() {
+  let [feeds, setFeeds] = useState([]);
 
   useEffect( ()=> {
     PublicFeedService.get().then( (response)=> {
+      if(response) {
+        setFeeds(response);
 
+      } else {
+        console.log("rsponse", response)
+      }
     });
   }, [])
   return (
@@ -90,8 +94,8 @@ export default function Album() {
         <Container sx={{ py: 8 }} maxWidth="md">
           {/* End hero unit */}
           <Grid container spacing={4}>
-            {cards.map((card) => (
-              <Grid item key={card} xs={12} sm={6} md={4}>
+            {feeds.map((feed) => (
+              <Grid item key={feed.title + feed.author_id} xs={12} sm={6} md={4}>
                 <Card
                   sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
                 >
@@ -101,17 +105,11 @@ export default function Album() {
                       // 16:9
                       pt: '56.25%',
                     }}
-                    image="https://source.unsplash.com/random"
+                    image={feed.media.m}
                     alt="random"
                   />
                   <CardContent sx={{ flexGrow: 1 }}>
-                    <Typography gutterBottom variant="h5" component="h2">
-                      Heading
-                    </Typography>
-                    <Typography>
-                      This is a media card. You can use this section to describe the
-                      content.
-                    </Typography>
+                    {feed.description}
                   </CardContent>
                   <CardActions>
                     <Button size="small">View</Button>
