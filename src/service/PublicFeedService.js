@@ -2,9 +2,13 @@ import Endpoints from '../endpoints.js';
 import fetchJsonp from "fetch-jsonp";
 
 const service = {
-    get: () => {
-
-        const dataPromise = fetchJsonp(Endpoints.PUBLIC_FEED + '?jsoncallback=data&format=json', {
+    get: (filter) => {
+console.log("request")
+        let url = Endpoints.PUBLIC_FEED + '?jsoncallback=data&format=json'
+        if(filter) {
+            url += filter
+        }
+        const dataPromise = fetchJsonp(url, {
             jsonpCallbackFunction: 'data',
         })
             .then(function (response) {
