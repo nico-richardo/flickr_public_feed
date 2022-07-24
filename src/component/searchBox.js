@@ -6,11 +6,11 @@ import SearchIcon from '@mui/icons-material/Search';
 
 export default function CustomizedInputBase(props) {
 
-    let { callback } = props;
+    let { onChange } = props;
     let [value, setValue] = React.useState("");
 
     let onSearch = () => {
-        callback && callback(value)
+        onChange && onChange(value)
     }
     return (
         <Paper
@@ -19,10 +19,10 @@ export default function CustomizedInputBase(props) {
         >
             <InputBase
                 sx={{ ml: 1, flex: 1 }}
-                placeholder="Search Google Maps"
+                placeholder="Search Image By Tags"
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
-                inputProps={{ 'aria-label': 'search by tags' }}
+                inputProps={{ 'aria-label': 'search image by tags' }}
             />
             <IconButton sx={{ p: '10px' }} aria-label="search" onClick={onSearch}>
                 <SearchIcon />

@@ -1,5 +1,5 @@
 import AppBar from '@mui/material/AppBar';
-import CameraIcon from '@mui/icons-material/PhotoCamera';
+import CollectionsIcon from '@mui/icons-material/Collections';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -15,7 +15,7 @@ import Link from '@mui/material/Link';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useEffect, useState } from 'react';
 import PublicFeedService from '../service/PublicFeedService.js';
-import { CardActionArea } from '@mui/material';
+import { CardActionArea, Divider } from '@mui/material';
 import CustomizedInputBase from './searchBox.js';
 
 function Copyright() {
@@ -64,9 +64,9 @@ export default function Album() {
       <CssBaseline />
       <AppBar position="relative">
         <Toolbar>
-          <CameraIcon sx={{ mr: 2 }} />
+          <CollectionsIcon sx={{ mr: 2 }} />
           <Typography variant="h6" color="inherit" noWrap>
-            Album layout
+            Gallery
           </Typography>
         </Toolbar>
       </AppBar>
@@ -87,7 +87,7 @@ export default function Album() {
               color="text.primary"
               gutterBottom
             >
-              Album layout
+              Gallery
             </Typography>
             <Stack
               sx={{ pt: 4 }}
@@ -95,8 +95,8 @@ export default function Album() {
               spacing={2}
               justifyContent="center"
             >
-              <CustomizedInputBase 
-              callback={onSearch}/>
+              <CustomizedInputBase
+                onChange={onSearch} />
             </Stack>
           </Container>
         </Box>
@@ -137,8 +137,10 @@ export default function Album() {
       </main>
       {/* Footer */}
       <Box sx={{ bgcolor: 'background.paper', p: 6 }} component="footer">
+        <Divider>
+        </Divider>
         <Typography variant="h6" align="center" gutterBottom>
-          Footer
+          Gallery
         </Typography>
         <Typography
           variant="subtitle1"
@@ -146,7 +148,7 @@ export default function Album() {
           color="text.secondary"
           component="p"
         >
-          Something here to give the footer a purpose!
+          Using the Flickr's API, and here we are~
         </Typography>
         <Copyright />
       </Box>
