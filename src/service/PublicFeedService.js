@@ -3,11 +3,23 @@ import fetchJsonp from "fetch-jsonp";
 
 const service = {
     get: (filter) => {
-console.log("request")
-        let url = Endpoints.PUBLIC_FEED + '?jsoncallback=data&format=json'
-        if(filter) {
-            url += filter
+        console.log("request")
+        let url = Endpoints.PUBLIC_FEED
+
+        let param = {
+            jsoncallback: 'data',
+            format: 'json'
         }
+        
+        if (filter) {
+            param = {
+                ...param,
+                ...filter
+            }
+        }
+
+        let stringParams = new URLSearchParams(param).toString();
+        url += '?' + stringParams;
         const dataPromise = fetchJsonp(url, {
             jsonpCallbackFunction: 'data',
         })
